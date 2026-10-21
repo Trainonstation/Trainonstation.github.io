@@ -75,6 +75,36 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Debian小记——Sway安装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/10/21/Debian%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94Sway%E5%AE%89%E8%A3%85/" class="article-date">
+  <time class="dt-published" datetime="2026-10-21T03:32:32.786Z" itemprop="datePublished">2026-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: Debian小记——Sway安装<br>date: 2026&#x2F;05&#x2F;01</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/10/21/Debian%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94Sway%E5%AE%89%E8%A3%85/" data-id="cmvhk40yh0000aps62dgeh0v0" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/10/21/hello-world/" class="article-date">
@@ -114,7 +144,582 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/10/21/hello-world/" data-id="cmvhjtjge00009ks66xpo0g8l" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/10/21/hello-world/" data-id="cmvhk40z10005aps6evf1b9x1" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java之static" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/09/Java%E4%B9%8Bstatic/" class="article-date">
+  <time class="dt-published" datetime="2026-03-09T05:56:00.000Z" itemprop="datePublished">2026-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/03/09/Java%E4%B9%8Bstatic/">Java之公共池</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>今天继续学习Java,修饰词<code>static</code>有了更加深入的理解，再加上<a href="#./Java%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F.md">上一篇文章</a>对static变量的解释还不够细致，遂写篇文章解释一下。</p>
+<h2 id="static修饰词有什么含义？"><a href="#static修饰词有什么含义？" class="headerlink" title="static修饰词有什么含义？"></a>static修饰词有什么含义？</h2><p>&emsp;&emsp;我们举下面一个例子予以说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Test.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果我们尝试在同目录下的另一个java文件中尝试调用public class Test中的a值时会遇到一下情况：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Test2.java,引用Test.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test2</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(Test.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot make a static reference to the non-static field Test.a</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;我们在之前的文章“Java之变量存储的方式”中讲过仅需要添加<code>Test tmp = new Test()</code>即可使用属性a的值，但并未解释其原因，这里解释一下，这是因为作为Test类中的变量，a变量<strong>它是属于实例而非类的</strong>,因此字面上讲不可以通过类修改，哪怕像示例中a是<code>public</code>并且<code>final</code>的也不行，否则JVM在解释这段代码会很困惑，他不知道你是想改变所有实例的值（因为所有实例的值此时都与类的默认值相同且挂钩），还是只是想修改类的默认值好让之后创建的实例的相关属性的默认值与前面的不同。</p>
+<div stype = 'height:20px'></div>
+
+<p>&emsp;&emsp;那么如何在没有创建实例的情况下修改这个类的值呢？，我们来看一下下面的示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Test.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Test2.java,引用Test.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">Test</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">        Test.a = <span class="number">20</span>;</span><br><span class="line">        <span class="type">Test</span> <span class="variable">tmp2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">        System.out.println(tmp.a);</span><br><span class="line">        System.out.println(tmp2.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">20</span><br><span class="line">20</span><br></pre></td></tr></table></figure>
+<p>你不仅可以读取，甚至可以修改，而且是全局性的，之前创建的实例也会一并被修改，<strong>即该实例是属于类的，所有实例共享它</strong>。</p>
+<div stype = "height"></div>
+
+<p>&emsp;&emsp;总结一下，<code>static</code>的作用就是：</p>
+<center>
+
+<p><font size = 5> <em>声明该数据属于类而不属于实例，并将该数据写入静态区即所有实例共享的内存区域中</em> </font></p>
+</center>
+
+<p>顺带一提，你甚至可以在加上<code>static</code>后修改它的值，并且全局有效</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Test.a = <span class="number">20</span>;</span><br><span class="line">        <span class="type">Test</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">        System.out.println(Test.a);</span><br><span class="line">        System.out.println(tmp.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">20</span><br><span class="line">20</span><br></pre></td></tr></table></figure>
+
+
+<p>END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/09/Java%E4%B9%8Bstatic/" data-id="cmvhk40yx0002aps65kl9autk" data-title="Java之公共池" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-规范" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/09/%E8%A7%84%E8%8C%83/" class="article-date">
+  <time class="dt-published" datetime="2026-03-08T16:00:00.000Z" itemprop="datePublished">2026-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/03/09/%E8%A7%84%E8%8C%83/">规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>&emsp;&emsp;博客的写作在没有规范的情况下往往排版不美观同时增加写作的时间，也不方便程序自动添加目录。今天决定编制一条规范来统一一下日后的格式需求，也安排一下写作的时间。</p>
+<h2 id="1、排版格式"><a href="#1、排版格式" class="headerlink" title="1、排版格式"></a>1、排版格式</h2><ul>
+<li>任意单独成段的部分文字开头要加<code>&amp;emsp;&amp;emsp;</code></li>
+<li>文章分3个一级标题和数个二级标题及其下属标题构成，二级标题应当标有序号<strong>1、</strong>等，其中三个一级标题分别是<strong>背景</strong>、<strong>目录</strong>、<strong>结语</strong>。结语视情况而定</li>
+<li>应当使用<code>code</code>在段落中标记需要重点突出的代码，<em>斜体表示引用</em>，<strong>表示重点</strong>，<font size = 5>表示重要结论</font></li>
+<li>使用<code>&lt;center&gt;&lt;/center&gt;</code>居中表格，图表和重要结论</li>
+<li>标准文章字体为<code>size = 3</code>,重要结论为<code>size = 5</code></li>
+<li>代码表格引用与文字均相隔30px</li>
+<li>使用&#96;而非~标示代码</li>
+<li>用<code>bash</code>表示输出，若同时有命令，应加上提示符<code>$</code>,无提示符表示输出</li>
+<li>所有文章结束请加<strong>END</strong></li>
+</ul>
+<h2 id="2、写作时间"><a href="#2、写作时间" class="headerlink" title="2、写作时间"></a>2、写作时间</h2><ul>
+<li>有灵感应先记录想法和代码，待完成之后在续写，防止编写做边研究拖慢时间</li>
+<li>集中统一的写作时间定在周三与周六</li>
+</ul>
+<p>END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/09/%E8%A7%84%E8%8C%83/" data-id="cmvhk40z20007aps6dfkt6s4r" data-title="规范" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-编译原理解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" class="article-date">
+  <time class="dt-published" datetime="2026-03-06T11:39:00.000Z" itemprop="datePublished">2026-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/">编译原理解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <font size = 3>
+
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>&emsp;&emsp;今天刚开始上计算机组成原理，发现老师在第一章讲到的编译原理与我之前理解的不同，在这里写篇文章专门研究一下</p>
+<h2 id="代码运行的步骤"><a href="#代码运行的步骤" class="headerlink" title="代码运行的步骤"></a>代码运行的步骤</h2><p>&emsp;&emsp;根据高等教育出版社唐朔飞老师编写的 <strong>《计算机组成原理》</strong> 的内容，高级语言到机器码的执行包含一下五个过程:</p>
+<center>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[高级语言（C,python,Rust）]--&gt;B(汇编语言)</span><br><span class="line">    B--&gt;C(系统库调用)</span><br><span class="line">    C--&gt;D(微码指令)</span><br><span class="line">    D--&gt;E[机器指令]</span><br></pre></td></tr></table></figure>
+
+</center>
+
+<div style="height:30px"></div>
+
+<p>&emsp;&emsp;其中<strong>系统调用</strong>与<strong>微码指令</strong>着实令人感到奇怪，汇编的指令已经可以直接编程控制与数据命令的二进制码传递给机器，为什么还要在走多余的两步呢？</p>
+<h3 id="运行时与编译时"><a href="#运行时与编译时" class="headerlink" title="运行时与编译时"></a>运行时与编译时</h3><p>&emsp;&emsp;事实上有这个疑惑的原因在于理解上面的过程时我们搞错了一个概念，<em>上述流程图表示的是指令执行的相对过程</em>而非<em>指令编译的过程</em></p>
+<div style = "height:30px"></div>
+
+<p>指令编译的过程如下：</p>
+<center>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[高级语言]</span><br><span class="line">    B(预处理)</span><br><span class="line">    C(汇编)</span><br><span class="line">    D[链接]</span><br><span class="line">    A--&gt;B</span><br><span class="line">    B--&gt;C</span><br><span class="line">    C--&gt;D</span><br></pre></td></tr></table></figure>
+
+</center>
+
+<div style = "height:70px"></div>
+&emsp;&emsp;汇编本身生成的文件并不能直接送入机器执行，需要通过调用系统运行库来实现一些操作，如读写文件，读取时钟信息等需要在系统空间完成的操作，因此需要在编译好的文件中写入链接指令指向具体的执行库中。这个过程涵盖了三种文件：
+
+<div style = "height:30px"></div>
+
+<center>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+<th>后缀(win&#x2F;linux)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目标文件(object)</td>
+<td>用户自己编写好的文件生成的可执行文件，缺少系统部分的实现，尚未链接</td>
+<td>.obj&#x2F;.o</td>
+</tr>
+<tr>
+<td>动态链接库(shared object)</td>
+<td>预先编写好并存储起来可执行文件，在目标文件运行时会通过链接调用</td>
+<td>.dll&#x2F;.so</td>
+</tr>
+<tr>
+<td>静态链接库(archiver)</td>
+<td>与动态链接库类似，但在目标文件生成时便直接用它里面编写好的内容替换了进去</td>
+<td>.lib&#x2F;.a</td>
+</tr>
+</tbody></table>
+</center>
+
+<div style = "height:30px"></div>
+
+<p>&emsp;&emsp;其中动态链接库本身也可以被认为是许多目标文件的集合，类似我们编写C代码时使用stdio.h调用的头文件一样。并且在同一种系统上通常可以使用许多不同的动态链接库如linux中既可以用glibc也可用minilibc等。</p>
+<div style = "height:30px"></div>
+
+<p>&emsp;&emsp;这么做的好处在于：</p>
+<br>
+
+<center>
+
+<p><font size = 5>可以大量节省编译生成的时间并缩小目标文件的大小，实现更高的编译效率</font></p>
+</center>
+
+<div style = "height:30px"></div>
+
+<p>以linux的gcc举例它们如何生成实现：（包含汇编步骤）</p>
+<center>
+
+<table>
+<thead>
+<tr>
+<th>步骤名称</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>汇编</td>
+<td><code>gcc -S -o a.s a.c</code></td>
+</tr>
+<tr>
+<td>生成目标文件（不链接）</td>
+<td><code>gcc -C -o a.o a.s</code></td>
+</tr>
+<tr>
+<td>生成目标文件（链接）</td>
+<td><code>gcc -o a a.o</code></td>
+</tr>
+</tbody></table>
+</center>
+
+<p>在生成过程中使用<code>-v</code>参数还能知道一些库的地址细节：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$  gcc -v -o a a.o</span><br><span class="line"></span><br><span class="line">LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../:/lib/:/usr/lib/</span><br></pre></td></tr></table></figure>
+
+<p>至此我们知道了：</p>
+<center>
+
+<p><font size=5> 系统库调用就是在运行可执行文件时调用系统的动态链接库以实现相应的操作 </font></p>
+</center>
+
+<h3 id="微码调用"><a href="#微码调用" class="headerlink" title="微码调用"></a>微码调用</h3><p>&emsp;&emsp;那么什么是微码调用呢？如果你安装过archlinux，那么在其<a href="#https://wiki.archlinuxcn.org/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97#%E5%AE%89%E8%A3%85%E5%BF%85%E9%9C%80%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85">安装指南</a>的 <em>2.2安装必需的软件包</em> 章节中应该看到过这样一句话：</p>
+<div style = "height:30px"></div>
+
+<blockquote>
+<p>请着重关注并按需选择下述软件包：</p>
+<p>CPU 微码更新——amd-ucode包 或 intel-ucode包——用于硬件错误和安全修复。</p>
+</blockquote>
+<div style = "height:30px"></div>
+
+<p>&emsp;&emsp;这里需要指明，微码既可以存于主板的ROM中，也可存在于一些可修改的存储介质中，因此arch这里安装微码包的操作还是有意义的（<a href="#j1">吗？</a>）  </p>
+<p>&emsp;&emsp;简单来说，CISC（复杂指令集）架构的芯片为了实现复杂的计算功能，会将传输过来的操作码操作按照微码转换成实际的电路操作来提升效率。例如传输指令1010表示加法运算，并不会让电路直接得到‘高低高低’的电压而是先经过微码处理为电路能理解的指令再去执行（如果让电路直接读取指令码来运作那就不是微码的运行方式了，这叫做硬连接）。</p>
+<p><a id ="j1" ></a></p>
+<p>&emsp;&emsp;有趣的是在<a href="#https://en.wikipedia.org/wiki/Microcode#RISC_enters">维基百科的相关页面</a>上有这样一段故事：</p>
+<div style = "height:30px"></div>
+
+<blockquote>
+<p>RISC enters<br><br>While companies continued to compete on the complexity of their instruction sets, and the use of microcode to implement these was unquestioned, in the mid-1970s an internal project in IBM was raising serious questions about the entire concept. As part of a project to develop a high-performance all-digital telephone switch, a team led by John Cocke began examining huge volumes of performance data from their customer’s 360 (and System&#x2F;370) programs. This led them to notice a curious pattern: when the ISA presented multiple versions of an instruction, the compiler almost always used the simplest one, instead of the one most directly representing the code. They learned that this was because those instructions were always implemented in hardware, and thus run the fastest. Using the other instruction might offer higher performance on some machines, but there was no way to know what machine they were running on. This defeated the purpose of using microcode in the first place, which was to hide these distinctions.[20]</p>
+</blockquote>
+<div style = "height:30px"></div>
+
+<p>翻译：</p>
+<div style = "height:30px"></div>
+
+<blockquote>
+<p>RISC 的起源<br><br>就在各家公司继续竞相提升指令集的复杂性，并普遍采用微码来实现这些指令集时，20世纪70年代中期，IBM的一个内部项目对整个设计理念提出了严峻的质疑。作为开发高性能全数字电话交换机项目的一部分，约翰·科克领导的团队开始仔细研究其客户使用360（及System&#x2F;370）程序产生的大量性能数据。这让他们注意到了一个奇特的现象：当指令集架构（ISA）提供同一指令的多个版本时，编译器几乎总是选择最简单的那一个，而非最能直接代表代码的那个。他们了解到，这是因为这些简单指令总是在硬件中实现，因此运行速度最快。使用其他指令或许在某些机器上能提供更高性能，但由于无法预知程序将运行在何种机器上，这就违背了最初使用微码的目的——即隐藏硬件实现上的差异。[20]</p>
+</blockquote>
+<div style = "height:30px"></div>
+
+<p>这后来催生了RISC(精简指令集)，不过这都是后话了。而且在arch里，安装微码的作用更多是作为底层硬件问题的补偿性措施而非性能提升。</p>
+<div style = "height:30px"></div>
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>&emsp;&emsp;总的来说，我们今天学习了一下较为传统的编译与源码执行的原理，其实放眼现在，以llvm和RISC等新的软件与指令集都在不断对这样一套机制进行着革新，llvm甚至不需要关心编译对象的具体类型只需要更换相应的兼容层即可编译从C到Rust等大量不同语言，不过技术日新月异，但我们若要理解这些新的技术，那么对旧的技术也应该有所了解。</p>
+<div style = "height:30px"></div>
+
+</font>
+
+<p>END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" data-id="cmvhk40z20006aps69pzrc3w7" data-title="编译原理解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-WSL提速" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/05/WSL%E6%8F%90%E9%80%9F/" class="article-date">
+  <time class="dt-published" datetime="2026-03-05T05:20:00.000Z" itemprop="datePublished">2026-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/03/05/WSL%E6%8F%90%E9%80%9F/">WSL的运行方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>发现电脑里wsl2下所有的发行版启动都要登上那么一两秒，于是今天决定做一些改动提升一下启动速度，结果发现只有第一次启动是慢的，后面几次都很快（每次都完全关闭windows terminal后再启动），遂决定研究一下。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>通过systemd的日志journal观察启动</li>
+<li>对比exit，poweroff和wsl –shutdown后的journal</li>
+<li>总结</li>
+</ul>
+<h2 id="通过systemd的日志journal观察启动"><a href="#通过systemd的日志journal观察启动" class="headerlink" title="通过systemd的日志journal观察启动"></a>通过systemd的日志journal观察启动</h2><p>通过查询日志发现上次启动的时间被认为是在1月31日，本次则是在3月5日</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ journalctl -b 1</span><br><span class="line"></span><br><span class="line">Jan 31 21:31:36 localhost systemd[250]: Reached target Exit the Session.</span><br><span class="line"></span><br><span class="line">$ journalctl -b 0</span><br><span class="line">Mar 05 13:18:54 localhost kernel: Linux version 6.6.87.2-microsoft-standard-WSL2 (root@439a258ad544) (gcc (GCC) 11.2.0, GNU ld (GNU Binutils) 2.37)...</span><br></pre></td></tr></table></figure>
+
+<p>再检查每次的启动时间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$journalctl</span> --list-boots</span><br><span class="line"></span><br><span class="line">IDX BOOT ID                          FIRST ENTRY                 LAST ENTRY</span><br><span class="line">-35 35375812ea604998ab33df99cfd63140 Sat 2026-01-31 17:12:04 CST Sat 2026-01-31 21:31:36 CST</span><br><span class="line">-34 d1fe7981360b4d5f81770ac46c4265e9 Sun 2026-02-01 11:27:31 CST Sun 2026-02-01 23:49:17 CST</span><br><span class="line">-33 232f790e814040c8be96ff53e9420d52 Tue 2026-02-03 14:24:43 CST Tue 2026-02-03 15:12:10 CST</span><br><span class="line">-32 ef017c62af8b494582f4a053361a8e3a Tue 2026-02-03 16:50:20 CST Wed 2026-02-04 13:48:13 CST</span><br><span class="line">-31 22a65f89950f4387b5ebbca44eba98e5 Wed 2026-02-04 16:04:41 CST Wed 2026-02-04 19:22:57 CST</span><br><span class="line">-30 99e2229c56094f93bc02d69ae08df352 Wed 2026-02-04 19:35:09 CST Wed 2026-02-04 19:35:24 CST</span><br><span class="line">-29 4a039f49974246f7bd43ed198a5563eb Thu 2026-02-05 11:01:59 CST Thu 2026-02-05 20:10:33 CST</span><br><span class="line">-28 b415462b8d8c403b8b454293e5d7b267 Sun 2026-02-08 15:44:48 CST Sun 2026-02-08 23:26:25 CST</span><br><span class="line">-27 d658ade8e27a4190937b58d3bbe2e11c Tue 2026-02-10 09:03:47 CST Tue 2026-02-10 14:46:04 CST</span><br><span class="line">-26 69329cf3c224460c9284ff06db61a52f Wed 2026-02-11 17:29:36 CST Wed 2026-02-11 18:38:16 CST</span><br><span class="line">-25 4aa1c65963554f409dd92afaf8f2746a Mon 2026-02-23 12:21:45 CST Mon 2026-02-23 12:24:49 CST</span><br><span class="line">-24 4a12d6e80b324020a55800cd2347df71 Mon 2026-02-23 12:57:24 CST Mon 2026-02-23 21:17:13 CST</span><br><span class="line">-23 fd2f31594bb144a58435a3130645fbe4 Wed 2026-02-25 12:14:50 CST Wed 2026-02-25 15:30:46 CST</span><br><span class="line">-22 db27e52dfe2e43e28798372297581b51 Wed 2026-02-25 15:32:53 CST Wed 2026-02-25 15:33:09 CST</span><br><span class="line">-21 545295345ec942ba917f074ce367638c Wed 2026-02-25 17:02:29 CST Wed 2026-02-25 17:02:41 CST</span><br><span class="line">-20 c196e4da23e54b5baae0c4284aa2c38a Wed 2026-02-25 19:38:42 CST Wed 2026-02-25 21:13:28 CST</span><br><span class="line">-19 14044b6355804a23a869f58107034f7d Thu 2026-02-26 19:22:53 CST Thu 2026-02-26 19:24:26 CST</span><br><span class="line">-18 d4f0ab617dc6415c951e8ecff787d9dd Fri 2026-02-27 11:39:39 CST Fri 2026-02-27 11:39:58 CST</span><br><span class="line">-17 c23f38a4c64b44b8981b73c2e0db9c0d Fri 2026-02-27 15:52:38 CST Fri 2026-02-27 16:10:37 CST</span><br><span class="line">-16 6c6e1a184f0947798d01dba8816406ba Fri 2026-02-27 21:25:48 CST Fri 2026-02-27 21:26:05 CST</span><br><span class="line">-15 fb98e4d39c8f45509d1f9dddecb85394 Sat 2026-02-28 21:44:37 CST Sat 2026-02-28 22:31:52 CST</span><br><span class="line">-14 c23d6381d4da40489a8a27987731051c Sun 2026-03-01 14:01:27 CST Sun 2026-03-01 14:01:54 CST</span><br><span class="line">-13 a2d1229ba4a74b7297d87b7c31d26098 Sun 2026-03-01 14:13:27 CST Sun 2026-03-01 14:15:53 CST</span><br><span class="line">-12 1dd5d20c7d7f43c382e3b57c896bbddc Sun 2026-03-01 14:18:58 CST Sun 2026-03-01 14:26:14 CST</span><br><span class="line">-11 f2b312366a2e495e9d0b7ebce2880ed4 Sun 2026-03-01 20:00:49 CST Sun 2026-03-01 20:02:07 CST</span><br><span class="line">-10 17f981e747dc4407b0f75644c8f6dadb Mon 2026-03-02 19:02:12 CST Mon 2026-03-02 19:32:47 CST</span><br><span class="line"> -9 0da7c1fbd48e4140b322a81e037cc9d8 Tue 2026-03-03 14:05:47 CST Tue 2026-03-03 14:24:35 CST</span><br><span class="line"> -8 15f29692c18648049baaa328f5fce0c4 Tue 2026-03-03 14:56:22 CST Tue 2026-03-03 15:24:18 CST</span><br><span class="line"> -7 4bcf24992df84eaca6644215f6b1cbdd Wed 2026-03-04 08:46:41 CST Wed 2026-03-04 09:24:35 CST</span><br><span class="line"> -6 36df7d3f52eb45e58b59e79e12e614cf Wed 2026-03-04 09:25:38 CST Wed 2026-03-04 13:02:32 CST</span><br><span class="line"> -5 132210ffc39247b2a725dcbd012cfc97 Wed 2026-03-04 13:06:21 CST Wed 2026-03-04 14:52:59 CST</span><br><span class="line"> -4 8280c70c66544acb9d890228930b0b2f Wed 2026-03-04 15:00:26 CST Wed 2026-03-04 16:09:06 CST</span><br><span class="line"> -3 a4709bf6a4cf46588a2ce1a2024528da Wed 2026-03-04 18:38:23 CST Wed 2026-03-04 18:44:05 CST</span><br><span class="line"> -2 8a8c826a2df94841910a6837aae93bc7 Wed 2026-03-04 18:52:03 CST Wed 2026-03-04 20:53:37 CST</span><br><span class="line"> -1 4de7d33d950c45fc8bbf7a0364b47503 Wed 2026-03-04 21:12:17 CST Wed 2026-03-04 21:12:45 CST</span><br><span class="line">  0 583e2e841e8e4161af4fa7754ad2c7e3 Thu 2026-03-05 13:18:54 CST Thu 2026-03-05 13:33:03 CST</span><br></pre></td></tr></table></figure>
+
+<p>通过这个日志可以知道，wsl今天只启动了一次，但我已经关闭了很多次它的窗口了，而之前的记录总是一天有好几次启动，可能与关闭方式有关。</p>
+<h2 id="对比exit，poweroff和wsl-–shutdown后的journal"><a href="#对比exit，poweroff和wsl-–shutdown后的journal" class="headerlink" title="对比exit，poweroff和wsl –shutdown后的journal"></a>对比exit，poweroff和wsl –shutdown后的journal</h2><ol>
+<li><p>关闭Windows terminal窗口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 583e2e841e8e4161af4fa7754ad2c7e3 Thu 2026-03-05 13:18:54 CST Thu 2026-03-05 13:33:03 CST</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>exit命令退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 583e2e841e8e4161af4fa7754ad2c7e3 Thu 2026-03-05 13:18:54 CST Thu 2026-03-05 13:33:03 CST</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>poweroff</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 583e2e841e8e4161af4fa7754ad2c7e3 Thu 2026-03-05 13:18:54 CST Thu 2026-03-05 13:44:32 CST</span><br></pre></td></tr></table></figure>
+<p>顺带一提，如果你用这个命令退出再次登陆时会有如下报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Windows\system32&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Windows&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Windows\System32\Wbem&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Windows\System32\WindowsPowerShell\v1.0\&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Program Files\dotnet\&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Program Files\VSCodium\bin&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Program Files\usbipd-win\&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Program Files\adb\platform-tools&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;E:\LINGO64_21\&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Users\26577\AppData\Local\Microsoft\WindowsApps&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\mingw32\bin&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Users\26577\AppData\Local\Programs\Microsoft VS Code\bin&#x27;</span></span><br><span class="line">wsl: Failed to translate <span class="string">&#x27;C:\Users\26577\.dotnet\tools&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>AI后才知道，wsl为了能够使用win下的工具，会尝试将windows的PATH环境变量翻译成类似&#x2F;mnt&#x2F;c…之类的Linux能理解的路径，暂时不用理会</p>
+</li>
+<li><p>Window休眠<br>中途因为上课合上了笔电的盖子，时间久了触发休眠，重新登陆发现登陆时间更新了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-1 583e2e841e8e4161af4fa7754ad2c7e3 Thu 2026-03-05 13:18:54 CST Thu 2026-03-05 13:44:32 CST</span><br><span class="line"> 0 73523533bdc848dfa73dd2a21b7eadb4 Thu 2026-03-05 17:31:07 CST Thu 2026-03-05 17:31:08 CST</span><br></pre></td></tr></table></figure>
+<p>这就意味着当windows进入休眠模式将内存内容存储致硬盘时应该会触发wsl的停机，并且这次启动的时间也确实比较长。</p>
+</li>
+<li><p>wsl –shutdown</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-2 583e2e841e8e4161af4fa7754ad2c7e3 Thu 2026-03-05 13:18:54 CST Thu 2026-03-05 13:44:32 CST</span><br><span class="line">-1 73523533bdc848dfa73dd2a21b7eadb4 Thu 2026-03-05 17:31:07 CST Thu 2026-03-05 17:34:27 CST</span><br><span class="line"> 0 40292a63ad6c46a0a5eb22a297398bb0 Thu 2026-03-05 17:34:39 CST Thu 2026-03-05 17:34:41 CST</span><br></pre></td></tr></table></figure>
+<p>wsl的关机指令效果等同于直接关闭系统而非转入后台</p>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>WSL的运行与启动很可能始终与wsl进程再windows上的状态有关，即便退出登录会话，只要windows或wsl进程没有进入休眠或是关机，那么wsl将一直处于运转的状态，<br>过去我一直以为wsl更多作为本地用户的开发环境可能为了减少占用不会对wsl进程保活，类似虚拟机，但现在看来很可能更像开在本地的服务器一样，不过如果真是这样的话依旧能够保持相对不错的性能真的很厉害了。</p>
+<p>END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/05/WSL%E6%8F%90%E9%80%9F/" data-id="cmvhk40z00004aps65lht7js6" data-title="WSL的运行方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java之变量存储方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/05/Java%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2026-03-05T00:46:00.000Z" itemprop="datePublished">2026-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/03/05/Java%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/">Java之变量存储方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>&emsp;&emsp;又是一个一个星期四的早上，老师上课还在讲配置开发环境，有些无聊，遂学习一下java对变量存储的方式，以下便是成果</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>静态与非静态变量</li>
+<li>栈变量</li>
+</ul>
+<h2 id="静态与非静态变量"><a href="#静态与非静态变量" class="headerlink" title="静态与非静态变量"></a>静态与非静态变量</h2><p>&emsp;&emsp;我们先举一个例子来解释</p>
+<p><a id="c1"></a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">float</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">10.1f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] arg)</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(Test.b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Vscode会提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot make a static reference to the non-static field Test.b</span><br></pre></td></tr></table></figure>
+
+
+
+<p>&emsp;&emsp;这是因为Test类虽然已经写出来了，但还没有创建对象，并且Test下的属性b不是static的<br><br><br>创建一个对象即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">float</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">10.1f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] arg)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">Test</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();  <span class="comment">//在这里创建对象</span></span><br><span class="line">        System.out.println(tmp.b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时编译通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;10.1</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;另外有一些类会自动加载变为静态类型，如基本类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] arg)</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(Byte.SIZE);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;8</span><br></pre></td></tr></table></figure>
+
+<p>在runnoob站上对这个机制有一句话解释：<br><br><br>“对于数值类型的基本类型的取值范围，我们无需强制去记忆，因为它们的值都已经以常量的形式定义在对应的包装类中了。”</p>
+<h2 id="栈变量"><a href="#栈变量" class="headerlink" title="栈变量"></a>栈变量</h2><p>与几乎所有的编程语言一样，将要被执行的main函数中的所有变量都存储在栈中，并且均为前面提及的静态变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] arg)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">Test</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">        </span><br><span class="line">        System.out.println(a);</span><br><span class="line">        System.out.println(tmp.k);</span><br><span class="line">        tmp.k++;</span><br><span class="line">        a++;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以正常使用并改变变量的值，实例对象也是如此</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;</span><br><span class="line">1</span><br><span class="line">100</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<h2 id="堆变量"><a href="#堆变量" class="headerlink" title="堆变量"></a>堆变量</h2><p>那么在main函数以外的变量和函数存储在哪里呢？自然是在我们的老朋友堆里面<br>在堆中的变量都是相对抽象的，他们不可以被直接使用，就像<a href="#c1">先前的代码</a>一样</p>
+<p>END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/05/Java%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" data-id="cmvhk40yz0003aps65c7tbhv3" data-title="Java之变量存储方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Git大学习(Arch(WSL2))——配置与保存" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/04/Git%E5%A4%A7%E5%AD%A6%E4%B9%A0(Arch(WSL2))%E2%80%94%E2%80%94%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BF%9D%E5%AD%98/" class="article-date">
+  <time class="dt-published" datetime="2026-03-04T10:37:00.000Z" itemprop="datePublished">2026-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/03/04/Git%E5%A4%A7%E5%AD%A6%E4%B9%A0(Arch(WSL2))%E2%80%94%E2%80%94%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BF%9D%E5%AD%98/">Git大学习(Arch(WSL2))——配置与保存</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>很久以前就想学git试试创建版本管理和项目拉取，但是总是因为网络问题之类的失败掉，现在已经万事俱全了，打算试一下这次能不能学会&#x1F600;</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>Github账户</li>
+<li>archlinux(WSL2)</li>
+<li>Git()</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在WSL2中，Git是预装的，不过仍然建议更新一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br></pre></td></tr></table></figure>
+
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>我们先直接跳到<a target="_blank" rel="noopener" href="https://www.runoob.com/">菜鸟</a>的网站进行学习，这里也推荐一下这个网站给各位初学者（如果你是的话），里面几乎包含了几乎所有主流互联网程序的开发教程。</p>
+<h1 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>开发人员的天堂与地狱——配置!</p>
+<p>Git的配置有两种方法，命令或是写配置文件，这里我们讲解前一种</p>
+<h3 id="配置路径与参数"><a href="#配置路径与参数" class="headerlink" title="配置路径与参数"></a>配置路径与参数</h3><p>配置文件的位置按照作用范围分三个地方：</p>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>参数</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;etc&#x2F;gitconfig</td>
+<td>–system</td>
+<td>系统级设置，所有用户默认的设置</td>
+</tr>
+<tr>
+<td>{你的工作目录下}&#x2F;.git&#x2F;cofnig</td>
+<td>无</td>
+<td>当前项目的设置</td>
+</tr>
+<tr>
+<td>~&#x2F;.gitconfig</td>
+<td>–global</td>
+<td>你的设置，在你的~目录及其以下目录下默认生效</td>
+</tr>
+</tbody></table>
+<h3 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h3><p>Git支持在配置中添加个人信息并在每次提交代码时附上这些信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#para是parameter的缩写，意思是“参数”,也就是上一节表格中“参数”列对应的内容，若参数为--system，则应使用sudo以获取修改/etc下文件的权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义开发人员名称</span></span><br><span class="line"><span class="built_in">sudo</span> git config --system user.name <span class="string">&quot;nobody&quot;</span></span><br><span class="line"></span><br><span class="line">git config [--para] user.name <span class="string">&quot;ztsdc&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义开发人员的工作邮箱</span></span><br><span class="line">git config [--para] user.email 2657742304@qq.com</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义使用的文本编辑器</span></span><br><span class="line">git config [--para] core.editor <span class="string">&quot;vim&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义差异分析工具(merge: v.使合并)</span></span><br><span class="line">git config [--para] merge.tool vimdiff</span><br><span class="line"></span><br><span class="line"><span class="comment">#等等</span></span><br></pre></td></tr></table></figure>
+<p>修改后记得不要忘记看一看有没有完成修改，使用–list参数来查看当前的配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#显示你所有的配置，不论是系统级的还是你自己的等等，</span></span><br><span class="line">git config --list</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">user.name=xxx <span class="comment"># 先显示系统级配置，再显示用户级</span></span><br><span class="line">user.name=xxx</span><br><span class="line">user.email=xxx@qq.com</span><br><span class="line">(END)</span><br><span class="line"><span class="comment">#按q即可退出</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="总体流程"><a href="#总体流程" class="headerlink" title="总体流程"></a>总体流程</h2><p>从工作开始git主要分一下几步(用我天池竞赛的项目为例)：</p>
+<p>1.初始化项目，你的提示符中会多一个“master”字符，如果你使用了oh_my_zsh并使用了特殊的主题，还会显示特殊的颜色</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#先进入工作目录，或者在命令后追加指定目录</span></span><br><span class="line"></span><br><span class="line">git init [repo]</span><br></pre></td></tr></table></figure>
+<p>应该有以下输出:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;Initialized empty Git repository <span class="keyword">in</span> /home/ztsdc/machine_learning/Tianchi/my_work/.git/</span><br></pre></td></tr></table></figure>
+<p>同时目录下多了一个.git目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -a</span><br><span class="line">&gt;&gt;&gt;.  ..  FreshManCompetion.ipynb  .git  result_sample.csv  tianchi_fresh_comp_train_item.csv  tianchi_fresh_comp_train_user.csv</span><br></pre></td></tr></table></figure>
+<div style = "height: 70px"></div>
+
+<p>2.完成了一部分代码工作，将其存入暂存区，表示“这是这次修改的文件”,同时提示符中的“master”后会多一个“+”号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add FreshManCompetion.ipynb <span class="comment">#-&gt;Staging Area，暂存区</span></span><br></pre></td></tr></table></figure>
+
+<div style = "height: 70px"></div>
+
+<p>3.所有文件都修改完毕，整齐的放入本地仓库，此时仓库里就有了迄今位置代码修改的记录。如果以后代码发生了问题，可以通过本地仓库的记录一步一改回来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit  <span class="comment">#-&gt;Local Repository，本地仓库</span></span><br></pre></td></tr></table></figure>
+<p>这里遇到了一个小插曲</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hint: Waiting <span class="keyword">for</span> your editor to close the file... error: cannot run vi: No such file or directory</span><br><span class="line">error: unable to start editor <span class="string">&#x27;vi&#x27;</span></span><br><span class="line">Please supply the message using either -m or -F option.</span><br></pre></td></tr></table></figure>
+<p>原来是我忘记修改默认的文本编辑器了！用先前的命令改一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config core.editor <span class="string">&quot;vim&quot;</span></span><br></pre></td></tr></table></figure>
+<p>再次尝试，或弹出一个vim编辑页面（##开头是我的备注），用来为本次修改留下信息，方便自己或者其他人维护项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##这里第一行会空出一行，用来写本次修改的备注</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Please enter the commit message for your changes. Lines starting</span></span><br><span class="line"><span class="comment"># with &#x27;#&#x27; will be ignored, and an empty message aborts the commit.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># On branch master</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Initial commit</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Changes to be committed:</span></span><br><span class="line"><span class="comment">#       new file:   FreshManCompetion.ipynb</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Untracked files:</span></span><br><span class="line"><span class="comment">#       result_sample.csv</span></span><br><span class="line"><span class="comment">#       tianchi_fresh_comp_train_item.csv</span></span><br><span class="line"><span class="comment">#       tianchi_fresh_comp_train_user.csv</span></span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>编辑完成后直接wq保存，该文本会原封不动的保存到{你的工作目录}&#x2F;.git&#x2F;COMMMIT_EDITMSG</p>
+<p>不过其实你可以用-m参数快速提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;This is test&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<div style = "height: 70px"></div>
+
+
+<p>4.把本地的仓库放到远程仓库里（相当于复制一份到远程仓库），日后无论在哪台机器上开发都可以快速把项目在本地构建起来。<br>不过在这之前要先有一个远程仓库才行啊!，所以我们先到GitHub.com，创建一个新仓库并复制url<br>使用命令remote add来添加这个仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/Tr*******n/TCFC.git</span><br></pre></td></tr></table></figure>
+
+<p>然后提交分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#           主机   分支（可以在提示符中看到你当前编辑的分支）</span></span><br><span class="line">git push -u origin master <span class="comment">#-&gt;Remote(GitHub/GitLab)，远程仓库</span></span><br></pre></td></tr></table></figure>
+
+
+<div style = "height: 70px"></div>
+
+
+<p>好了，今天就先到这里吧，实在是有点累了~_~</p>
+<p>END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/04/Git%E5%A4%A7%E5%AD%A6%E4%B9%A0(Arch(WSL2))%E2%80%94%E2%80%94%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BF%9D%E5%AD%98/" data-id="cmvhk40yu0001aps6e2uaas0j" data-title="Git大学习(Arch(WSL2))——配置与保存" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -144,7 +749,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/10/">October 2026</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/10/">October 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">March 2026</a></li></ul>
     </div>
   </div>
 
@@ -157,7 +762,23 @@
       <ul>
         
           <li>
+            <a href="/2026/10/21/Debian%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94Sway%E5%AE%89%E8%A3%85/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2026/10/21/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/09/Java%E4%B9%8Bstatic/">Java之公共池</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/09/%E8%A7%84%E8%8C%83/">规范</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/">编译原理解析</a>
           </li>
         
       </ul>

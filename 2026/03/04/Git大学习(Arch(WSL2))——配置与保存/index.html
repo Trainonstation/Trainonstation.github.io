@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Git大学习(Arch(WSL2))——配置与保存 | ztsdc的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="起因很久以前就想学git试试创建版本管理和项目拉取，但是总是因为网络问题之类的失败掉，现在已经万事俱全了，打算试一下这次能不能学会&#x1F600; 准备工作 Github账户 archlinux(WSL2) Git()  安装在WSL2中，Git是预装的，不过仍然建议更新一下 1sudo pacman -Syu  开始我们先直接跳到菜鸟的网站进行学习，这里也推荐一下这个网站给各位初学者（如果你是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git大学习(Arch(WSL2))——配置与保存">
+<meta property="og:url" content="http://example.com/2026/03/04/Git%E5%A4%A7%E5%AD%A6%E4%B9%A0(Arch(WSL2))%E2%80%94%E2%80%94%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BF%9D%E5%AD%98/index.html">
+<meta property="og:site_name" content="ztsdc的Blog">
+<meta property="og:description" content="起因很久以前就想学git试试创建版本管理和项目拉取，但是总是因为网络问题之类的失败掉，现在已经万事俱全了，打算试一下这次能不能学会&#x1F600; 准备工作 Github账户 archlinux(WSL2) Git()  安装在WSL2中，Git是预装的，不过仍然建议更新一下 1sudo pacman -Syu  开始我们先直接跳到菜鸟的网站进行学习，这里也推荐一下这个网站给各位初学者（如果你是">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-04T10:37:00.000Z">
+<meta property="article:modified_time" content="2026-10-21T03:32:32.902Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="ztsdc的Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ztsdc的Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">超懒作者，随机更新</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Git大学习(Arch(WSL2))——配置与保存" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/04/Git%E5%A4%A7%E5%AD%A6%E4%B9%A0(Arch(WSL2))%E2%80%94%E2%80%94%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BF%9D%E5%AD%98/" class="article-date">
+  <time class="dt-published" datetime="2026-03-04T10:37:00.000Z" itemprop="datePublished">2026-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Git大学习(Arch(WSL2))——配置与保存
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>很久以前就想学git试试创建版本管理和项目拉取，但是总是因为网络问题之类的失败掉，现在已经万事俱全了，打算试一下这次能不能学会&#x1F600;</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>Github账户</li>
+<li>archlinux(WSL2)</li>
+<li>Git()</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在WSL2中，Git是预装的，不过仍然建议更新一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br></pre></td></tr></table></figure>
+
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>我们先直接跳到<a target="_blank" rel="noopener" href="https://www.runoob.com/">菜鸟</a>的网站进行学习，这里也推荐一下这个网站给各位初学者（如果你是的话），里面几乎包含了几乎所有主流互联网程序的开发教程。</p>
+<h1 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>开发人员的天堂与地狱——配置!</p>
+<p>Git的配置有两种方法，命令或是写配置文件，这里我们讲解前一种</p>
+<h3 id="配置路径与参数"><a href="#配置路径与参数" class="headerlink" title="配置路径与参数"></a>配置路径与参数</h3><p>配置文件的位置按照作用范围分三个地方：</p>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>参数</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;etc&#x2F;gitconfig</td>
+<td>–system</td>
+<td>系统级设置，所有用户默认的设置</td>
+</tr>
+<tr>
+<td>{你的工作目录下}&#x2F;.git&#x2F;cofnig</td>
+<td>无</td>
+<td>当前项目的设置</td>
+</tr>
+<tr>
+<td>~&#x2F;.gitconfig</td>
+<td>–global</td>
+<td>你的设置，在你的~目录及其以下目录下默认生效</td>
+</tr>
+</tbody></table>
+<h3 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h3><p>Git支持在配置中添加个人信息并在每次提交代码时附上这些信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#para是parameter的缩写，意思是“参数”,也就是上一节表格中“参数”列对应的内容，若参数为--system，则应使用sudo以获取修改/etc下文件的权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义开发人员名称</span></span><br><span class="line"><span class="built_in">sudo</span> git config --system user.name <span class="string">&quot;nobody&quot;</span></span><br><span class="line"></span><br><span class="line">git config [--para] user.name <span class="string">&quot;ztsdc&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义开发人员的工作邮箱</span></span><br><span class="line">git config [--para] user.email 2657742304@qq.com</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义使用的文本编辑器</span></span><br><span class="line">git config [--para] core.editor <span class="string">&quot;vim&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义差异分析工具(merge: v.使合并)</span></span><br><span class="line">git config [--para] merge.tool vimdiff</span><br><span class="line"></span><br><span class="line"><span class="comment">#等等</span></span><br></pre></td></tr></table></figure>
+<p>修改后记得不要忘记看一看有没有完成修改，使用–list参数来查看当前的配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#显示你所有的配置，不论是系统级的还是你自己的等等，</span></span><br><span class="line">git config --list</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">user.name=xxx <span class="comment"># 先显示系统级配置，再显示用户级</span></span><br><span class="line">user.name=xxx</span><br><span class="line">user.email=xxx@qq.com</span><br><span class="line">(END)</span><br><span class="line"><span class="comment">#按q即可退出</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="总体流程"><a href="#总体流程" class="headerlink" title="总体流程"></a>总体流程</h2><p>从工作开始git主要分一下几步(用我天池竞赛的项目为例)：</p>
+<p>1.初始化项目，你的提示符中会多一个“master”字符，如果你使用了oh_my_zsh并使用了特殊的主题，还会显示特殊的颜色</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#先进入工作目录，或者在命令后追加指定目录</span></span><br><span class="line"></span><br><span class="line">git init [repo]</span><br></pre></td></tr></table></figure>
+<p>应该有以下输出:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;Initialized empty Git repository <span class="keyword">in</span> /home/ztsdc/machine_learning/Tianchi/my_work/.git/</span><br></pre></td></tr></table></figure>
+<p>同时目录下多了一个.git目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -a</span><br><span class="line">&gt;&gt;&gt;.  ..  FreshManCompetion.ipynb  .git  result_sample.csv  tianchi_fresh_comp_train_item.csv  tianchi_fresh_comp_train_user.csv</span><br></pre></td></tr></table></figure>
+<div style = "height: 70px"></div>
+
+<p>2.完成了一部分代码工作，将其存入暂存区，表示“这是这次修改的文件”,同时提示符中的“master”后会多一个“+”号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add FreshManCompetion.ipynb <span class="comment">#-&gt;Staging Area，暂存区</span></span><br></pre></td></tr></table></figure>
+
+<div style = "height: 70px"></div>
+
+<p>3.所有文件都修改完毕，整齐的放入本地仓库，此时仓库里就有了迄今位置代码修改的记录。如果以后代码发生了问题，可以通过本地仓库的记录一步一改回来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit  <span class="comment">#-&gt;Local Repository，本地仓库</span></span><br></pre></td></tr></table></figure>
+<p>这里遇到了一个小插曲</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hint: Waiting <span class="keyword">for</span> your editor to close the file... error: cannot run vi: No such file or directory</span><br><span class="line">error: unable to start editor <span class="string">&#x27;vi&#x27;</span></span><br><span class="line">Please supply the message using either -m or -F option.</span><br></pre></td></tr></table></figure>
+<p>原来是我忘记修改默认的文本编辑器了！用先前的命令改一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config core.editor <span class="string">&quot;vim&quot;</span></span><br></pre></td></tr></table></figure>
+<p>再次尝试，或弹出一个vim编辑页面（##开头是我的备注），用来为本次修改留下信息，方便自己或者其他人维护项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##这里第一行会空出一行，用来写本次修改的备注</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Please enter the commit message for your changes. Lines starting</span></span><br><span class="line"><span class="comment"># with &#x27;#&#x27; will be ignored, and an empty message aborts the commit.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># On branch master</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Initial commit</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Changes to be committed:</span></span><br><span class="line"><span class="comment">#       new file:   FreshManCompetion.ipynb</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Untracked files:</span></span><br><span class="line"><span class="comment">#       result_sample.csv</span></span><br><span class="line"><span class="comment">#       tianchi_fresh_comp_train_item.csv</span></span><br><span class="line"><span class="comment">#       tianchi_fresh_comp_train_user.csv</span></span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>编辑完成后直接wq保存，该文本会原封不动的保存到{你的工作目录}&#x2F;.git&#x2F;COMMMIT_EDITMSG</p>
+<p>不过其实你可以用-m参数快速提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;This is test&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<div style = "height: 70px"></div>
+
+
+<p>4.把本地的仓库放到远程仓库里（相当于复制一份到远程仓库），日后无论在哪台机器上开发都可以快速把项目在本地构建起来。<br>不过在这之前要先有一个远程仓库才行啊!，所以我们先到GitHub.com，创建一个新仓库并复制url<br>使用命令remote add来添加这个仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/Tr*******n/TCFC.git</span><br></pre></td></tr></table></figure>
+
+<p>然后提交分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#           主机   分支（可以在提示符中看到你当前编辑的分支）</span></span><br><span class="line">git push -u origin master <span class="comment">#-&gt;Remote(GitHub/GitLab)，远程仓库</span></span><br></pre></td></tr></table></figure>
+
+
+<div style = "height: 70px"></div>
+
+
+<p>好了，今天就先到这里吧，实在是有点累了~_~</p>
+<p>END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/04/Git%E5%A4%A7%E5%AD%A6%E4%B9%A0(Arch(WSL2))%E2%80%94%E2%80%94%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BF%9D%E5%AD%98/" data-id="cmvhk40yu0001aps6e2uaas0j" data-title="Git大学习(Arch(WSL2))——配置与保存" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/03/05/Java%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java之变量存储方式
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/10/">October 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">March 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/10/21/Debian%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94Sway%E5%AE%89%E8%A3%85/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2026/10/21/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/09/Java%E4%B9%8Bstatic/">Java之公共池</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/09/%E8%A7%84%E8%8C%83/">规范</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/">编译原理解析</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

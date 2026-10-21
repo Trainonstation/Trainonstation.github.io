@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>编译原理解析 | ztsdc的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="背景&emsp;&emsp;今天刚开始上计算机组成原理，发现老师在第一章讲到的编译原理与我之前理解的不同，在这里写篇文章专门研究一下 代码运行的步骤&emsp;&emsp;根据高等教育出版社唐朔飞老师编写的 《计算机组成原理》 的内容，高级语言到机器码的执行包含一下五个过程:   12345graph TD    A[高级语言（C,python,Rust）]--&gt;B(汇编语言)    B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理解析">
+<meta property="og:url" content="http://example.com/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="ztsdc的Blog">
+<meta property="og:description" content="背景&emsp;&emsp;今天刚开始上计算机组成原理，发现老师在第一章讲到的编译原理与我之前理解的不同，在这里写篇文章专门研究一下 代码运行的步骤&emsp;&emsp;根据高等教育出版社唐朔飞老师编写的 《计算机组成原理》 的内容，高级语言到机器码的执行包含一下五个过程:   12345graph TD    A[高级语言（C,python,Rust）]--&gt;B(汇编语言)    B">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-06T11:39:00.000Z">
+<meta property="article:modified_time" content="2026-10-21T03:32:33.294Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="ztsdc的Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ztsdc的Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">超懒作者，随机更新</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-编译原理解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" class="article-date">
+  <time class="dt-published" datetime="2026-03-06T11:39:00.000Z" itemprop="datePublished">2026-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      编译原理解析
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <font size = 3>
+
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>&emsp;&emsp;今天刚开始上计算机组成原理，发现老师在第一章讲到的编译原理与我之前理解的不同，在这里写篇文章专门研究一下</p>
+<h2 id="代码运行的步骤"><a href="#代码运行的步骤" class="headerlink" title="代码运行的步骤"></a>代码运行的步骤</h2><p>&emsp;&emsp;根据高等教育出版社唐朔飞老师编写的 <strong>《计算机组成原理》</strong> 的内容，高级语言到机器码的执行包含一下五个过程:</p>
+<center>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[高级语言（C,python,Rust）]--&gt;B(汇编语言)</span><br><span class="line">    B--&gt;C(系统库调用)</span><br><span class="line">    C--&gt;D(微码指令)</span><br><span class="line">    D--&gt;E[机器指令]</span><br></pre></td></tr></table></figure>
+
+</center>
+
+<div style="height:30px"></div>
+
+<p>&emsp;&emsp;其中<strong>系统调用</strong>与<strong>微码指令</strong>着实令人感到奇怪，汇编的指令已经可以直接编程控制与数据命令的二进制码传递给机器，为什么还要在走多余的两步呢？</p>
+<h3 id="运行时与编译时"><a href="#运行时与编译时" class="headerlink" title="运行时与编译时"></a>运行时与编译时</h3><p>&emsp;&emsp;事实上有这个疑惑的原因在于理解上面的过程时我们搞错了一个概念，<em>上述流程图表示的是指令执行的相对过程</em>而非<em>指令编译的过程</em></p>
+<div style = "height:30px"></div>
+
+<p>指令编译的过程如下：</p>
+<center>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[高级语言]</span><br><span class="line">    B(预处理)</span><br><span class="line">    C(汇编)</span><br><span class="line">    D[链接]</span><br><span class="line">    A--&gt;B</span><br><span class="line">    B--&gt;C</span><br><span class="line">    C--&gt;D</span><br></pre></td></tr></table></figure>
+
+</center>
+
+<div style = "height:70px"></div>
+&emsp;&emsp;汇编本身生成的文件并不能直接送入机器执行，需要通过调用系统运行库来实现一些操作，如读写文件，读取时钟信息等需要在系统空间完成的操作，因此需要在编译好的文件中写入链接指令指向具体的执行库中。这个过程涵盖了三种文件：
+
+<div style = "height:30px"></div>
+
+<center>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+<th>后缀(win&#x2F;linux)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目标文件(object)</td>
+<td>用户自己编写好的文件生成的可执行文件，缺少系统部分的实现，尚未链接</td>
+<td>.obj&#x2F;.o</td>
+</tr>
+<tr>
+<td>动态链接库(shared object)</td>
+<td>预先编写好并存储起来可执行文件，在目标文件运行时会通过链接调用</td>
+<td>.dll&#x2F;.so</td>
+</tr>
+<tr>
+<td>静态链接库(archiver)</td>
+<td>与动态链接库类似，但在目标文件生成时便直接用它里面编写好的内容替换了进去</td>
+<td>.lib&#x2F;.a</td>
+</tr>
+</tbody></table>
+</center>
+
+<div style = "height:30px"></div>
+
+<p>&emsp;&emsp;其中动态链接库本身也可以被认为是许多目标文件的集合，类似我们编写C代码时使用stdio.h调用的头文件一样。并且在同一种系统上通常可以使用许多不同的动态链接库如linux中既可以用glibc也可用minilibc等。</p>
+<div style = "height:30px"></div>
+
+<p>&emsp;&emsp;这么做的好处在于：</p>
+<br>
+
+<center>
+
+<p><font size = 5>可以大量节省编译生成的时间并缩小目标文件的大小，实现更高的编译效率</font></p>
+</center>
+
+<div style = "height:30px"></div>
+
+<p>以linux的gcc举例它们如何生成实现：（包含汇编步骤）</p>
+<center>
+
+<table>
+<thead>
+<tr>
+<th>步骤名称</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>汇编</td>
+<td><code>gcc -S -o a.s a.c</code></td>
+</tr>
+<tr>
+<td>生成目标文件（不链接）</td>
+<td><code>gcc -C -o a.o a.s</code></td>
+</tr>
+<tr>
+<td>生成目标文件（链接）</td>
+<td><code>gcc -o a a.o</code></td>
+</tr>
+</tbody></table>
+</center>
+
+<p>在生成过程中使用<code>-v</code>参数还能知道一些库的地址细节：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$  gcc -v -o a a.o</span><br><span class="line"></span><br><span class="line">LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../:/lib/:/usr/lib/</span><br></pre></td></tr></table></figure>
+
+<p>至此我们知道了：</p>
+<center>
+
+<p><font size=5> 系统库调用就是在运行可执行文件时调用系统的动态链接库以实现相应的操作 </font></p>
+</center>
+
+<h3 id="微码调用"><a href="#微码调用" class="headerlink" title="微码调用"></a>微码调用</h3><p>&emsp;&emsp;那么什么是微码调用呢？如果你安装过archlinux，那么在其<a href="#https://wiki.archlinuxcn.org/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97#%E5%AE%89%E8%A3%85%E5%BF%85%E9%9C%80%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85">安装指南</a>的 <em>2.2安装必需的软件包</em> 章节中应该看到过这样一句话：</p>
+<div style = "height:30px"></div>
+
+<blockquote>
+<p>请着重关注并按需选择下述软件包：</p>
+<p>CPU 微码更新——amd-ucode包 或 intel-ucode包——用于硬件错误和安全修复。</p>
+</blockquote>
+<div style = "height:30px"></div>
+
+<p>&emsp;&emsp;这里需要指明，微码既可以存于主板的ROM中，也可存在于一些可修改的存储介质中，因此arch这里安装微码包的操作还是有意义的（<a href="#j1">吗？</a>）  </p>
+<p>&emsp;&emsp;简单来说，CISC（复杂指令集）架构的芯片为了实现复杂的计算功能，会将传输过来的操作码操作按照微码转换成实际的电路操作来提升效率。例如传输指令1010表示加法运算，并不会让电路直接得到‘高低高低’的电压而是先经过微码处理为电路能理解的指令再去执行（如果让电路直接读取指令码来运作那就不是微码的运行方式了，这叫做硬连接）。</p>
+<p><a id ="j1" ></a></p>
+<p>&emsp;&emsp;有趣的是在<a href="#https://en.wikipedia.org/wiki/Microcode#RISC_enters">维基百科的相关页面</a>上有这样一段故事：</p>
+<div style = "height:30px"></div>
+
+<blockquote>
+<p>RISC enters<br><br>While companies continued to compete on the complexity of their instruction sets, and the use of microcode to implement these was unquestioned, in the mid-1970s an internal project in IBM was raising serious questions about the entire concept. As part of a project to develop a high-performance all-digital telephone switch, a team led by John Cocke began examining huge volumes of performance data from their customer’s 360 (and System&#x2F;370) programs. This led them to notice a curious pattern: when the ISA presented multiple versions of an instruction, the compiler almost always used the simplest one, instead of the one most directly representing the code. They learned that this was because those instructions were always implemented in hardware, and thus run the fastest. Using the other instruction might offer higher performance on some machines, but there was no way to know what machine they were running on. This defeated the purpose of using microcode in the first place, which was to hide these distinctions.[20]</p>
+</blockquote>
+<div style = "height:30px"></div>
+
+<p>翻译：</p>
+<div style = "height:30px"></div>
+
+<blockquote>
+<p>RISC 的起源<br><br>就在各家公司继续竞相提升指令集的复杂性，并普遍采用微码来实现这些指令集时，20世纪70年代中期，IBM的一个内部项目对整个设计理念提出了严峻的质疑。作为开发高性能全数字电话交换机项目的一部分，约翰·科克领导的团队开始仔细研究其客户使用360（及System&#x2F;370）程序产生的大量性能数据。这让他们注意到了一个奇特的现象：当指令集架构（ISA）提供同一指令的多个版本时，编译器几乎总是选择最简单的那一个，而非最能直接代表代码的那个。他们了解到，这是因为这些简单指令总是在硬件中实现，因此运行速度最快。使用其他指令或许在某些机器上能提供更高性能，但由于无法预知程序将运行在何种机器上，这就违背了最初使用微码的目的——即隐藏硬件实现上的差异。[20]</p>
+</blockquote>
+<div style = "height:30px"></div>
+
+<p>这后来催生了RISC(精简指令集)，不过这都是后话了。而且在arch里，安装微码的作用更多是作为底层硬件问题的补偿性措施而非性能提升。</p>
+<div style = "height:30px"></div>
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>&emsp;&emsp;总的来说，我们今天学习了一下较为传统的编译与源码执行的原理，其实放眼现在，以llvm和RISC等新的软件与指令集都在不断对这样一套机制进行着革新，llvm甚至不需要关心编译对象的具体类型只需要更换相应的兼容层即可编译从C到Rust等大量不同语言，不过技术日新月异，但我们若要理解这些新的技术，那么对旧的技术也应该有所了解。</p>
+<div style = "height:30px"></div>
+
+</font>
+
+<p>END</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" data-id="cmvhk40z20006aps69pzrc3w7" data-title="编译原理解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/03/09/%E8%A7%84%E8%8C%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          规范
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/03/05/WSL%E6%8F%90%E9%80%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">WSL的运行方式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/10/">October 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">March 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/10/21/Debian%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94Sway%E5%AE%89%E8%A3%85/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2026/10/21/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/09/Java%E4%B9%8Bstatic/">Java之公共池</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/09/%E8%A7%84%E8%8C%83/">规范</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/06/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/">编译原理解析</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
